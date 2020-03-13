@@ -66,6 +66,7 @@ const UserState = {
 
 app.post('/api/im-callback', (req, res) => {
   const { CallbackCommand, Info, From_Account, To_Account, MsgBody } = req.body
+  console.log(CallbackCommand)
   switch (CallbackCommand) {
     case commendType["State.StateChange"]:
       if (Info.Action === UserState.LogIn && !/servicer/.test(Info.TO_Account)) {
