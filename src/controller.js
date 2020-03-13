@@ -20,6 +20,7 @@ function robotPickServicer(user, servicer) {
       Data: servicer
     }
   }
+  return im.sendMsg(options)
 }
 
 module.exports = {

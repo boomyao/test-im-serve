@@ -36,7 +36,7 @@ function sendMsg(options = {}) {
       if (res.data.ActionStatus === 'OK') {
         resolve()
       } else {
-        reject(res.data.ErrorInfo)
+        reject( res.data.ErrorCode + res.data.ErrorInfo)
       }
     })
   })

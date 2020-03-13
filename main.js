@@ -61,21 +61,21 @@ const commendType = {
 
 const UserState = {
   "Logout": "Logout",
-  "LogIn": "LogIn"
+  "Login": "Login"
 }
 
 app.post('/api/im-callback', (req, res) => {
-  const { CallbackCommand, Info, From_Account, To_Account, MsgBody } = req.body
-  console.log(CallbackCommand)
+  const { CallbackCommand, Info, From_Account, To_Account } = req.body
   switch (CallbackCommand) {
     case commendType["State.StateChange"]:
-      if (Info.Action === UserState.LogIn && !/servicer/.test(Info.TO_Account)) {
-        ctlr.robotAutoRep(Info.TO_Account)
+      if (Info.Action === UserState.Login && !/servicer/.test(Info.TO_Account)) {
+        ctlr.robotAutoRep(Info.To_Account)
       }
       break
     case commendType["C2C.CallbackAfterSendMsg"]:
       if (To_Account === 'robot') {
-        ctlr.robotPickServicer(From_Account, 'servicer1')
+        const servicer = 'servicer' + (Date.now() % 2 + 1)
+        ctlr.robotPickServicer(From_Account, servicer)
       }
       break
   }
